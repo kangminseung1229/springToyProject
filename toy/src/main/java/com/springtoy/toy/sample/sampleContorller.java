@@ -19,6 +19,11 @@ public class sampleContorller {
         return "sample/test";
     }
 
+    @GetMapping("success")
+    public String success() {
+        return "sample/success";
+    }
+
     // database connection test
     @GetMapping("list")
     public String database_connectionTest(Model model) {

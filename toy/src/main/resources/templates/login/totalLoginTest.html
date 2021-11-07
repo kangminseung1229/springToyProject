@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+
+<body>
+
+
+    <h1>회원가입</h1>
+    ID : <input type="text" name="registID" id="registID" />
+    PW : <input type="password" name="registPW" id="registPW" />
+
+    <button onclick="regist();">회원가입</button>
+
+    <form th:action="@{/login}" method="post">
+
+        <h1>Login</h1>
+        ID : <input type="text" name="userid" id="" />
+        PW : <input type="password" name="userpw" id="" />
+
+        <button type="submit">submit</button>
+
+    </form>
+
+
+    <h1>검증</h1>
+    ID : <input type="text" name="userid" id="compareID" />
+    PW : <input type="password" name="userpw" id="comparePW" />
+
+    <button onclick="compare();">검증하기</button>
+
+
+
+
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function compare() {
+
+        var compareID = $("#compareID").val();
+        var comparePW = $("#comparePW").val();
+
+        $.ajax({
+            type: "post",
+            url: "/login/compare",
+            data: {
+                userid: compareID,
+                userpw: comparePW
+            },
+            dataType: "text",
+            success: function (response) {
+
+                alert(response);
+
+            }
+        });
+
+
+    }
+
+    function regist() {
+
+
+        alert('regist');
+
+        var registId = $("#registID").val();
+        var registPw = $("#registPW").val();
+
+        $.ajax({
+            type: "post",
+            url: "/login/register",
+            data: {
+                registId: registId,
+                registPw: registPw
+            },
+            dataType: "text",
+            success: function (response) {
+                alert(response);
+            },
+            error: function (e) { 
+                console.log(e);
+             }
+        });
+
+    }
+</script>

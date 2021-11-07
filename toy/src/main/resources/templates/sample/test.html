@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html lang="en">
+
+<head th:replace="fragments/htmltop :: top('제목입니다.')"></head>
+
+
+<body>
+
+
+
+    <head th:replace="fragments/htmltop :: head('test1')"></head>
+
+
+    <table>
+        <tr th:each="list : ${list}">
+            <td th:th:text="${list.id}"></td>
+            <td th:th:text="${list.title}"></td>
+            <td th:th:text="${list.memo}"></td>
+            <td th:th:text="${list.created}"></td>
+            <td th:th:text="${list.updated}"></td>
+        </tr>
+    </table>
+
+
+    <h1 th:text="${data1}"></h1>
+</body>
+
+</html>
