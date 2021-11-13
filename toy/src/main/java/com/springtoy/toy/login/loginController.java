@@ -34,8 +34,8 @@ public class loginController {
 
     //index
     @GetMapping("/")
-    public String index(){
-        return "login/totalLoginTest";
+    public String index(){ 
+        return "test";
     }
 
     // 회원가입페이지

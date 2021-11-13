@@ -20,7 +20,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Autowired
     private DataSource dataSource;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO Auto-generated method stub
@@ -35,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
-                        .loginPage("/login")
+                        .loginPage("/")
                         .failureHandler(new failHandler())
                         .permitAll()
                         .and()
