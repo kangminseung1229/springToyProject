@@ -32,12 +32,7 @@ public class loginController {
     @Autowired
     private usersService usersService;
 
-    //index
-    @GetMapping("/")
-    public String index(){ 
-        return "test";
-    }
-
+    
     // 회원가입페이지
     @GetMapping("register")
     public String register() {
@@ -90,6 +85,12 @@ public class loginController {
         return "complete";
 
 
+    }
+
+    //spring security principal
+    @GetMapping("principal")
+    public String principal(){
+        return "login/loginPrincipal";
     }
     
 

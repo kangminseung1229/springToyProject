@@ -28,9 +28,13 @@ public class usersService implements UserDetailsService{
         
         securityUsers users = SUrepo.findByUserid(username);
 
-
+        
         List<GrantedAuthority> authorities = new ArrayList<>(); 
-        authorities.add(new SimpleGrantedAuthority("ROLE_BASE"));
+        System.out.println(users.getRoles().get(0));
+        users.getRoles().forEach(e -> {
+            authorities.add(new SimpleGrantedAuthority(e.getRole()));
+        });
+        // authorities.add(new SimpleGrantedAuthority("ROLE_BASE"));
 
         return new User(users.getUserid(), users.getUserpw(), authorities);
 

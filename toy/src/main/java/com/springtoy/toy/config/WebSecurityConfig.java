@@ -2,6 +2,7 @@ package com.springtoy.toy.config;
 
 import javax.sql.DataSource;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
-                        .loginPage("/")
+                        .usernameParameter("userid")
+                        .passwordParameter("userpw")
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/login/principal")
                         .failureHandler(new failHandler())
                         .permitAll()
                         .and()
@@ -69,10 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
-
-
-    
 
     
 }
