@@ -2,7 +2,6 @@ package com.springtoy.toy.config;
 
 import javax.sql.DataSource;
 
-import com.springtoy.toy.member.usersService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
     @Autowired
     private DataSource dataSource;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO Auto-generated method stub
@@ -40,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                         .usernameParameter("userid")
                         .passwordParameter("userpw")
                         .loginPage("/login")
-                        .defaultSuccessUrl("/sample/success")
+                        .defaultSuccessUrl("/login/principal")
                         .failureHandler(new failHandler())
                         .permitAll()
                         .and()
