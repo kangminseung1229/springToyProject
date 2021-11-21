@@ -1,9 +1,5 @@
 package com.springtoy.toy.config;
 
-import javax.sql.DataSource;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,17 +15,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
-    @Autowired
-    private DataSource dataSource;
+    // @Autowired
+    // private DataSource dataSource;
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO Auto-generated method stub
-    
-
-        
 
         http.authorizeRequests()
                         .antMatchers("/").permitAll()
+                        .antMatchers("/assets/**").permitAll()
+                        .antMatchers("/img/**").permitAll()
+                        .antMatchers("/*.css").permitAll()
                         .antMatchers("/login/**").permitAll()
                         .antMatchers("/login/register").permitAll()
                         .anyRequest().authenticated()
@@ -38,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                         .usernameParameter("userid")
                         .passwordParameter("userpw")
                         .loginPage("/login")
-                        .defaultSuccessUrl("/login/principal")
+                        .defaultSuccessUrl("/sample/list")
                         .failureHandler(new failHandler())
                         .permitAll()
                         .and()

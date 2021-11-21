@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import lombok.Data;
 
 @Data
@@ -22,9 +25,11 @@ public class sampleData {
 
     // 실제 컬럼이름에는 언더바가 있지만 JPA 네이밍에 의해 오류가 날 확률이 있어 자바에서는 다른 네이밍을 쓴다.
     @Column(name = "create_time")
+    @CreationTimestamp
     private Date created;
 
     @Column(name = "update_time")
+    @UpdateTimestamp
     private Date updated;
 
 }
