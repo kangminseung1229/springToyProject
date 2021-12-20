@@ -20,6 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
 
         http.authorizeRequests()
                         .antMatchers("/").permitAll()
+                        .antMatchers("/assets/**").permitAll()
+                        .antMatchers("/img/**").permitAll()
+                        .antMatchers("/*.css").permitAll()
                         .antMatchers("/login/**").permitAll()
                         .antMatchers("/login/register").permitAll()
                         .anyRequest().authenticated()
@@ -28,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter  {
                         .usernameParameter("userid")
                         .passwordParameter("userpw")
                         .loginPage("/login")
-                        .defaultSuccessUrl("/login/principal")
+                        .defaultSuccessUrl("/sample/list")
                         .failureHandler(new failHandler())
                         .permitAll()
                         .and()

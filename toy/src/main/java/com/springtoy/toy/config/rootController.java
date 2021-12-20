@@ -11,7 +11,7 @@ public class rootController {
     // index
     @GetMapping("/")
     public String index() {
-        return "login/totalLoginTest";
+        return "login/login";
     }
 
 }

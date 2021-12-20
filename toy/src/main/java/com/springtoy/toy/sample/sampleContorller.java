@@ -1,17 +1,23 @@
 package com.springtoy.toy.sample;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/sample")
 public class sampleContorller {
 
     @Autowired
-    private sampleDataRepository SDrepo;
+    private sampleDataRepository sampleRepo;
 
     // controller 경로 테스트
     @GetMapping("test")
@@ -24,20 +30,22 @@ public class sampleContorller {
         return "sample/success";
     }
 
-    // database connection test
-    @GetMapping("list")
-    public String database_connectionTest(Model model) {
-         
-        model.addAttribute("list", SDrepo.findAll());
+    // ----------------CRUD -----------------
+    // 샘플리스트
+    @GetMapping("/list")
+	public String list(HttpServletRequest request, Model model, @PageableDefault(size = 10) Pageable pageable,
+			@RequestParam(required = false, defaultValue = "") String searchText) {
 
-        // Optional<sampleData> data1 = SDrepo.findById(1l);
-        // model.addAttribute("data1", data1.get());
+		Page<sampleData> list = sampleRepo.findByTitleContainingOrMemoContainingOrderByIdDesc(searchText, searchText,pageable);
 
-        sampleData data2 = SDrepo.findById(1l).orElse(null);
-        model.addAttribute("data1", data2);
+		int startPage = Math.max(1, (list.getPageable().getPageNumber() / pageable.getPageSize()) * pageable.getPageSize()+1 );
+		int endPage = Math.min(list.getTotalPages(), startPage + pageable.getPageSize() -1);
 
-        return "sample/test";
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("list", list);
 
-    }
+		return "sample/sampleList";
+	}
 
 }
