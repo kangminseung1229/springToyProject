@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
 
@@ -20,6 +23,9 @@ public class sampleData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // database 에 생성 방식을 위임한다. autoincrement
     private Long id;
+
+    @NotBlank
+    @Length(min=8, max=200)
     private String title;
     private String memo;
 

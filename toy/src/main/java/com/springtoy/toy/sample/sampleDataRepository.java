@@ -1,5 +1,7 @@
 package com.springtoy.toy.sample;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface sampleDataRepository extends JpaRepository<sampleData, Long> {
 
     Page<sampleData> findByTitleContainingOrMemoContainingOrderByIdDesc(String title, String memo, Pageable pageable);
+
+    boolean existsByTitle(String title);
 }
